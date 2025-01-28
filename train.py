@@ -97,6 +97,7 @@ def save_images(images, path, args, **kwargs):
         ndarr = grid.permute(1, 2, 0).to('cpu').numpy()
         im = Image.fromarray(ndarr)
     im.save(path)
+    print("FILEPATH: ", path)
     return im
 
 def crop_whitespace_width(img):
