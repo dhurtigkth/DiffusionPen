@@ -666,8 +666,8 @@ def main():
     unet = DataParallel(unet, device_ids=device_ids)
     unet = unet.to(args.device)
     
-    #print('unet parameters')
-    #print('unet', sum(p.numel() for p in unet.parameters() if p.requires_grad))
+    print('unet parameters')
+    print('unet', sum(p.numel() for p in unet.parameters() if p.requires_grad))
     
     optimizer = optim.AdamW(unet.parameters(), lr=0.0001)
     lr_scheduler = None 
@@ -712,6 +712,8 @@ def main():
     feature_extractor = feature_extractor.to(args.device)
     feature_extractor.requires_grad_(False)
     feature_extractor.eval()
+
+    print("CHECK")
     
     if args.train_mode == 'train':
         train(diffusion, unet, ema, ema_model, vae, optimizer, mse_loss, train_loader, test_loader, style_classes, feature_extractor, vocab_size, ddim, transform, args, tokenizer=tokenizer, text_encoder=text_encoder, lr_scheduler=lr_scheduler)
