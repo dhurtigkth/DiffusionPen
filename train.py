@@ -581,6 +581,8 @@ def main():
     parser.add_argument('--sampling_mode', type=str, default='single_sampling', help='single_sampling (generate single image), paragraph (generate paragraph)')
     
     args = parser.parse_args()
+
+    #args.device = "cpu"
     
     print('torch version', torch.__version__)
     
@@ -646,7 +648,11 @@ def main():
         device_ids = [3,4]
         print('using dataparallel with device:', device_ids)
     else:
-        idx = int(''.join(filter(str.isdigit, args.device)))
+        if args.device == "cpu":
+            idx = 0
+        else:
+            idx = int(''.join(filter(str.isdigit, args.device)))
+        #idx = 0 # CHANGED BECAUSE USING CPU
         device_ids = [idx]
     #unet = unet.to(args.device)
 
@@ -721,14 +727,15 @@ def main():
     elif args.train_mode == 'sampling':
         
         print('Sampling started....')
-        
-        unet.load_state_dict(torch.load(f'{args.save_path}/models/ckpt.pt', map_location=args.device))
+        print("PATH: ", args.save_path)
+
+        unet.load_state_dict(torch.load(f'{args.save_path}/models/ckpt.pt', map_location=args.device), strict=False)
         print('unet loaded')
         unet.eval()
         
         ema = EMA(0.995)
         ema_model = copy.deepcopy(unet).eval().requires_grad_(False)
-        ema_model.load_state_dict(torch.load(f'{args.save_path}/models/ema_ckpt.pt'))
+        ema_model.load_state_dict(torch.load(f'{args.save_path}/models/ema_ckpt.pt', map_location=args.device), strict=False)
         ema_model.eval()
         
         if args.sampling_mode == 'single_sampling':
@@ -762,7 +769,7 @@ def main():
                 print('Word:', word)
                 print('Style:', s)
                 labels = torch.tensor([s]).long().to(args.device)
-                ema_sampled_images = diffusion.sampling(ema_model, vae, n=len(labels), x_text=word, labels=labels, args=args, style_extractor=feature_extractor, noise_scheduler=ddim, transform=transform, character_classes=None, tokenizer=tokenizer, text_encoder=text_encoder, clip_model=None, run_idx=None)  
+                ema_sampled_images = diffusion.sampling(ema_model, vae, n=len(labels), x_text=word, labels=labels, args=args, style_extractor=feature_extractor, noise_scheduler=ddim, transform=transform, character_classes=None, tokenizer=tokenizer, text_encoder=text_encoder, run_idx=None)  
                 #print('ema_sampled_images', ema_sampled_images.shape)
                 image = ema_sampled_images.squeeze(0)
                 
@@ -810,6 +817,7 @@ def main():
                 print(f'Word {word} - scaled_img {scaled_img.size}')
                 # Padding
                 #if word is in punctuation:
+                punctuation = [",", "."]
                 if word in punctuation:
                     #rescale to height 10
                     w_punc = scaled_img.width
@@ -911,4 +919,6 @@ def main():
 if __name__ == "__main__":
     main()
   
+  
+
   
