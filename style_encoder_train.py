@@ -686,7 +686,8 @@ class IAMDataset_style(WordLineDataset):
             #
 
             try:
-                #print('img_path', img_path + '.png')
+                
+                print('img_path', img_path + '.png')
                 img = Image.open(img_path + '.png').convert('RGB') #.convert('L')
                 #print('img shape PIL', img.size)
                 img = image_resize_PIL(img, height=64)
