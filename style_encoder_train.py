@@ -703,7 +703,7 @@ class IAMDataset_style(WordLineDataset):
                 img = centered_PIL(img, [64, 256])
                 
             except:
-                print("Exception)
+                print("Exception")
                 continue
                 
             #except:
