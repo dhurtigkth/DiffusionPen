@@ -21,6 +21,7 @@ import cv2
 import time
 import json
 import random
+import matplotlib.pyplot as plt
 
 
 class AvgMeter:
@@ -277,7 +278,7 @@ class WordLineDataset(Dataset):
                 self.stopwords.append(line.strip().split(','))
             self.stopwords = self.stopwords[0]
         
-        save_path = './IAM_dataset_PIL_style'
+        save_path = './Riksarkivet_dataset_PIL_style' # CHANGED , set custom save path
         if os.path.exists(save_path) is False:
             os.makedirs(save_path, exist_ok=True)
         save_file = '{}/{}_{}_{}.pt'.format(save_path, self.subset, self.segmentation_level, self.setname) #dataset_path + '/' + set + '_' + level + '_IAM.pt'
@@ -326,16 +327,16 @@ class WordLineDataset(Dataset):
         
         transcr = self.data[index][1]
 
-        wid = self.data[index][2]
+        wid = self.data[index][2]   # writer ID
 
         img_path = self.data[index][3]
         #pick another sample that has the same self.data[2] or same writer id
         positive_samples = [p for p in self.data if p[2] == wid and len(p[1])>3]
         negative_samples = [n for n in self.data if n[2] != wid and len(n[1])>3]
         
+       #print("POSITIVE: ", positive_samples[0], "NEGATIVE: ", negative_samples[0])
         
         positive = random.choice(positive_samples)[0]
-        
         # Make sure you have at least 5 matching images
         if len(positive_samples) >= 5:
             # Randomly select 5 indices from the matching_indices
@@ -688,7 +689,7 @@ class IAMDataset_style(WordLineDataset):
                 #print('img_path', img_path + '.png')
                 img = Image.open(img_path + '.png').convert('RGB') #.convert('L')
                 #print('img shape PIL', img.size)
-                #img = image_resize_PIL(img, height=64)
+                img = image_resize_PIL(img, height=64)
                 
                 if img.height < 64 and img.width < 256:
                     img = img
@@ -696,6 +697,8 @@ class IAMDataset_style(WordLineDataset):
                     img = image_resize_PIL(img, height=img.height // 2)
                 
                 #widths.append(img.size[0])
+                # CHANGED CODE, the code complains that the images are not the same size and there is no centered/reshaping(??)
+                img = centered_PIL(img, [64, 256])
                 
             except:
                continue
@@ -716,6 +719,113 @@ class IAMDataset_style(WordLineDataset):
             transcr = transcr.replace("|", " ")
             
             data += [(img, transcr, writer_name, img_path)]
+            
+        return data
+    
+class RiksarkivetDataset_style(WordLineDataset):
+    def __init__(self, basefolder, subset, segmentation_level, fixed_size, transforms):
+        super().__init__(basefolder, subset, segmentation_level, fixed_size, transforms)
+        self.setname = 'Riksarkivet'
+        self.trainset_file = '{}/{}/set_split/trainset.txt'.format(self.basefolder, self.setname)
+        self.valset_file = '{}/{}/set_split/validationset1.txt'.format(self.basefolder, self.setname)
+        self.testset_file = '{}/{}/set_split/testset.txt'.format(self.basefolder, self.setname)
+        self.line_file = '{}/ascii/lines.txt'.format(self.basefolder, self.setname)
+        self.word_file = './iam_data/ascii/words.txt'.format(self.basefolder, self.setname)
+        self.word_path = '{}/words'.format(self.basefolder, self.setname)
+        self.line_path = '{}/lines'.format(self.basefolder, self.setname)
+        self.forms = './riksarkivet_data/ascii/forms.txt'
+        #self.stopwords_path = '{}/{}/iam-stopwords'.format(self.basefolder, self.setname)
+        super().__finalize__()
+
+    def main_loader(self, subset, segmentation_level) -> list:
+        print("We're in..")
+        def gather_iam_info(self, set='train', level='word'):
+            if subset == 'train':
+                #valid_set = np.loadtxt(self.trainset_file, dtype=str)
+                valid_set = np.loadtxt('./utils/aachen_iam_split/train_val.uttlist', dtype=str)
+                #print(valid_set)
+            elif subset == 'val':
+                #valid_set = np.loadtxt(self.valset_file, dtype=str)
+                valid_set = np.loadtxt('./utils/aachen_iam_split/validation.uttlist', dtype=str)
+            elif subset == 'test':
+                #valid_set = np.loadtxt(self.testset_file, dtype=str)
+                valid_set = np.loadtxt('./utils/aachen_iam_split/test.uttlist', dtype=str)
+            else:
+                raise ValueError
+            if level == 'word':
+                gtfile= self.word_file
+                root_path = self.word_path
+                print('root_path', root_path)
+                forms = self.forms
+            elif level == 'line':
+                gtfile = self.line_file
+                root_path = self.line_path
+            else:
+                raise ValueError
+            gt = []
+            form_writer_dict = {}
+        
+            for line in open(gtfile):
+                if not line.startswith("#"):
+                    info = line.strip().split()
+                    name = info[0]
+
+                    img_path = "riksarkivet_data/lines/" + name
+                    
+                    transcr = ' '.join(info[8:])
+                    #writer_name = form_writer_dict[form_name]
+                    #print('writer_name', writer_name)
+                    #writer_name = wr_dict[writer_name]
+                    writer_name = name.split("-")[0]
+                    if writer_name == "gota":
+                        writer_name = 0
+                    if writer_name == "jonkopings":
+                        writer_name = 1
+                    gt.append((img_path, transcr, writer_name))
+    
+            return gt
+
+        info = gather_iam_info(self, subset, segmentation_level)
+        data = []
+        widths = []
+        for i, (img_path, transcr, writer_name) in enumerate(info):
+            if i % 1000 == 0:
+                print('imgs: [{}/{} ({:.0f}%)]'.format(i, len(info), 100. * i / len(info)))
+            #
+
+
+            #print('img_path', img_path + '.png')
+            img = Image.open(img_path + '.png').convert('RGB') #.convert('L')
+            #print('img shape PIL', img.size)
+            img = image_resize_PIL(img, height=64)
+            
+            if img.height < 64 and img.width < 256:
+                img = img
+            else:
+                img = image_resize_PIL(img, height=img.height // 2)
+            
+            #widths.append(img.size[0])
+            # CHANGED CODE, the code complains that the images are not the same size and there is no centered/reshaping(??)
+            img = centered_PIL(img, [64, 256])
+
+                
+            #except:
+            #    print('Could not add image file {}.png'.format(img_path))
+            #    continue
+
+            # transform iam transcriptions
+            transcr = transcr.replace(" ", "")
+            # "We 'll" -> "We'll"
+            special_cases  = ["s", "d", "ll", "m", "ve", "t", "re"]
+            # lower-case 
+            for cc in special_cases:
+                transcr = transcr.replace("|\'" + cc, "\'" + cc)
+                transcr = transcr.replace("|\'" + cc.upper(), "\'" + cc.upper())
+
+            transcr = transcr.replace("|", " ")
+            
+            data += [(img, transcr, writer_name, img_path)]
+            
             
         return data
 
@@ -938,7 +1048,10 @@ def train_epoch_mixed(train_loader, model, criterion_triplet, criterion_classifi
     for i, data in enumerate(pbar):
         
         img = data[0]
+        #plt.imshow(img)
+        #wid = torch.tensor(data[3]).to(device) # CHANGED, started complaining?
         wid = data[3].to(device)
+
         positive = data[4].to(device)
         negative = data[5].to(device)
         
@@ -1139,7 +1252,7 @@ def main():
     
         myDataset = IAMDataset_style
         # dataset_folder = '/usr/share/datasets_ianos'
-        dataset_folder = '/path/to/iam_data/'
+        dataset_folder = 'iam_data' # CHANGED, have to change here
         aug_transforms = [lambda x: affine_transformation(x, s=.1)]
         
         train_transform = transforms.Compose([
@@ -1154,6 +1267,7 @@ def main():
                             ])
         
         #train_data = myDataset(dataset_folder, 'train', 'word', fixed_size=(1 * 64, 256), tokenizer=None, text_encoder=None, feat_extractor=None, transforms=train_transform, args=args)
+        print("DATASET FOLDER: ", dataset_folder)
         train_data = myDataset(dataset_folder, 'train', 'word', fixed_size=(1 * 64, 256), transforms=train_transform)
         
         #print('len train data', len(train_data))
@@ -1179,15 +1293,60 @@ def main():
             
         style_classes = 339
     
-    else:
+    else: # CHANGED
         print('You need to add your own dataset and define the number of style classes!!!')
+        myDataset = RiksarkivetDataset_style
+        # dataset_folder = '/usr/share/datasets_ianos'
+        dataset_folder = args.dataset # CHANGED, have to change here
+        aug_transforms = [lambda x: affine_transformation(x, s=.1)]
+        
+        train_transform = transforms.Compose([
+                            #transforms.RandomHorizontalFlip(),
+                            transforms.ToTensor(),
+                            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)) #transforms.Normalize((0.5,), (0.5,)),  #
+                            ])
+        
+        val_transform = transforms.Compose([
+                            transforms.ToTensor(),
+                            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)) #transforms.Normalize((0.5,), (0.5,)),  #
+                            ])
+        
+        #train_data = myDataset(dataset_folder, 'train', 'word', fixed_size=(1 * 64, 256), tokenizer=None, text_encoder=None, feat_extractor=None, transforms=train_transform, args=args)
+        print("DATASET FOLDER: ", dataset_folder)
+        train_data = myDataset(dataset_folder, 'train', 'line', fixed_size=(1 * 64, 256), transforms=train_transform)
+        
+        #print('len train data', len(train_data))
+        #split with torch.utils.data.Subset into train and val
+        validation_size = int(0.2 * len(train_data))
+
+        # Calculate the size of the training set
+        train_size = len(train_data) - validation_size
+
+
+        # Use random_split to split the dataset into train and validation sets
+        train_data, val_data = random_split(train_data, [train_size, validation_size], generator=torch.Generator().manual_seed(42))
+        print('len train data', len(train_data))
+        print('len val data', len(val_data))
+        
+        train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True, num_workers=4)
+        
+
+        val_loader = DataLoader(val_data, batch_size=args.batch_size, shuffle=False, num_workers=4)
+        if val_loader is not None:
+            print('Val data')
+        else:
+            print('No validation data')
+            
+        style_classes = 2
     
     
     
     
     if args.model == 'mobilenetv2_100':
         print('Using mobilenetv2_100')
-        model = ImageEncoder(model_name='mobilenetv2_100', num_classes=style_classes, pretrained=True, trainable=True)
+        #model = ImageEncoder(model_name='mobilenetv2_100', num_classes=style_classes, pretrained=True, trainable=True)
+        # CHANGED CODE idk why but the Mixed_Encoder is the only one outputing logits and the other code demands it
+        model = Mixed_Encoder(model_name='mobilenetv2_100', num_classes=style_classes, pretrained=True, trainable=True)
         print('Number of model parameters: {}'.format(sum([p.data.nelement() for p in model.parameters()])))
         if args.pretrained == True:
             
@@ -1248,3 +1407,4 @@ def main():
     
 if __name__ == '__main__':
     main()
+
