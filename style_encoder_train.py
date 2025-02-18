@@ -681,6 +681,7 @@ class IAMDataset_style(WordLineDataset):
         data = []
         widths = []
         for i, (img_path, transcr, writer_name) in enumerate(info):
+            print("Starting image reading process")
             if i % 1000 == 0:
                 print('imgs: [{}/{} ({:.0f}%)]'.format(i, len(info), 100. * i / len(info)))
             #
@@ -702,7 +703,8 @@ class IAMDataset_style(WordLineDataset):
                 img = centered_PIL(img, [64, 256])
                 
             except:
-               continue
+                print("Exception)
+                continue
                 
             #except:
             #    print('Could not add image file {}.png'.format(img_path))
