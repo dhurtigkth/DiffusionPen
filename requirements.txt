@@ -1,0 +1,16 @@
+wandb==0.14.0
+opencv-python==4.5.*
+scipy==1.10.1
+gdown==4.6.6
+matplotlib
+streamlit
+tqdm
+diffusers==0.16.1
+msgpack
+huggingface_hub==0.13.2
+einops
+transformers
+timm
+#skimage
+scikit-image
+omegaconf
