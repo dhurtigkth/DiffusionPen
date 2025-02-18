@@ -681,14 +681,12 @@ class IAMDataset_style(WordLineDataset):
         data = []
         widths = []
         for i, (img_path, transcr, writer_name) in enumerate(info):
-            print("Starting image reading process")
             if i % 1000 == 0:
                 print('imgs: [{}/{} ({:.0f}%)]'.format(i, len(info), 100. * i / len(info)))
             #
 
             try:
-                
-                print('img_path', img_path + '.png')
+            
                 img = Image.open(img_path + '.png').convert('RGB') #.convert('L')
                 #print('img shape PIL', img.size)
                 img = image_resize_PIL(img, height=64)
@@ -792,12 +790,14 @@ class RiksarkivetDataset_style(WordLineDataset):
         data = []
         widths = []
         for i, (img_path, transcr, writer_name) in enumerate(info):
+            print("Starting image reading process...")
             if i % 1000 == 0:
                 print('imgs: [{}/{} ({:.0f}%)]'.format(i, len(info), 100. * i / len(info)))
             #
 
 
             #print('img_path', img_path + '.png')
+            print("Image path: ", "/content/drive/MyDrive/Riksarkivet/DiffusionPen/" + img_path + '.png')
             img = Image.open("/content/drive/MyDrive/Riksarkivet/DiffusionPen/" + img_path + '.png').convert('RGB') #.convert('L')
             #print('img shape PIL', img.size)
             img = image_resize_PIL(img, height=64)
