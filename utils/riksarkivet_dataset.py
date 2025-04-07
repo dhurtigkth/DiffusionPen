@@ -110,9 +110,9 @@ class RiksarkivetDataset(WordLineDataset):
                     form_name = '-'.join(line_name.split('-')[:-1])
                     #print('form_name', form_name)
                     #if (info[1] != 'ok') or (form_name not in valid_set):
-                    if (form_name not in valid_set):
+                    #if (form_name not in valid_set):
                         #print(line_name)
-                        continue
+                    #    continue
                     img_path = '/'.join(pathlist)
                     
                     transcr = ' '.join(info[8:])
