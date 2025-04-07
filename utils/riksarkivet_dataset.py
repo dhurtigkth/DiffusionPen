@@ -14,7 +14,8 @@ class RiksarkivetDataset(WordLineDataset):
         self.trainset_file = '{}/{}/set_split/trainset.txt'.format(self.basefolder, self.setname)
         self.valset_file = '{}/{}/set_split/validationset1.txt'.format(self.basefolder, self.setname)
         self.testset_file = '{}/{}/set_split/testset.txt'.format(self.basefolder, self.setname)
-        self.line_file = '{}/ascii/lines.txt'.format(self.basefolder, self.setname)
+        #self.line_file = '{}/ascii/lines.txt'.format(self.basefolder, self.setname)
+        self.line_file = "/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/lines/ascii/lines.txt"
         self.word_file = './iam_data/ascii/words.txt'.format(self.basefolder, self.setname)
         #self.word_path = '{}/words'.format(self.basefolder, self.setname)
         self.word_path = self.basefolder
