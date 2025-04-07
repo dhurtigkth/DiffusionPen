@@ -873,9 +873,7 @@ class Mixed_Encoder(nn.Module):
 
 #================ Performance and Loss Function ========================
 def performance(pred, label):
-    print("pred: ", pred)
-    print("label: ", label)
-    
+
     loss = nn.CrossEntropyLoss()
    
     loss = loss(pred, label)
@@ -1056,9 +1054,6 @@ def train_epoch_mixed(train_loader, model, criterion_triplet, criterion_classifi
         #wid = data[3].to(device)
         positive = data[4].to(device)
         negative = data[5].to(device)
-
-        print("type positive: ", type(positive))
-        print("type negative: ", type(negative))
         
         anchor = img.to(device)
         # Get logits and features from the model
