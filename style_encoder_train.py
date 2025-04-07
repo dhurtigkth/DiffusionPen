@@ -1099,7 +1099,8 @@ def val_epoch_mixed(val_loader, model, criterion_triplet, criterion_classificati
     for i, data in enumerate(pbar):
         
         img = data[0].to(device)
-        wid = data[3].to(device)
+        wid = torch.tensor([int(x) for x in data[3]]).to(device) # Changed, det måste vara ints
+        #wid = data[3].to(device)
         positive = data[4].to(device)
         negative = data[5].to(device)
         
