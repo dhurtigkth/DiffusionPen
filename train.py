@@ -627,7 +627,7 @@ def main():
             train_data = myDataset(riksarkivet_folder, 'train', 'line', fixed_size=(1 * 64, 256), tokenizer=None, text_encoder=None, feat_extractor=None, transforms=transform, args=args)
         else:
             train_data = myDataset(riksarkivet_folder, 'train', 'line', fixed_size=(1 * 64, 256), tokenizer=None, text_encoder=None, feat_extractor=None, transforms=transform, args=args)
-            test_data = myDataset(riksarkivet_folder, 'test', 'line', fixed_size=(1 * 64, 256), tokenizer=None, text_encoder=None, feat_extractor=None, transforms=transform, args=args)
+            #test_data = myDataset(riksarkivet_folder, 'test', 'line', fixed_size=(1 * 64, 256), tokenizer=None, text_encoder=None, feat_extractor=None, transforms=transform, args=args)
         print('train data', len(train_data))
         
         test_size = args.batch_size
