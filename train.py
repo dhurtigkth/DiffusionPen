@@ -18,6 +18,7 @@ import wandb
 from torchvision import transforms
 from feature_extractor import ImageEncoder
 from utils.iam_dataset import IAMDataset
+from utils.iam_dataset import RiksarkivetDataset
 from utils.GNHK_dataset import GNHK_Dataset
 from utils.auxilary_functions import *
 from torchvision.utils import save_image
@@ -557,7 +558,7 @@ def main():
     parser.add_argument('--model_name', type=str, default='diffusionpen', help='diffusionpen or wordstylist (previous work)')
     parser.add_argument('--level', type=str, default='word', help='word, line')
     parser.add_argument('--img_size', type=int, default=(64, 256))  
-    parser.add_argument('--dataset', type=str, default='iam', help='iam, gnhk') 
+    parser.add_argument('--dataset', type=str, default='riksarkivet', help='iam, gnhk, riksarkivet') 
     #UNET parameters
     parser.add_argument('--channels', type=int, default=4)
     parser.add_argument('--emb_dim', type=int, default=320)
@@ -603,6 +604,22 @@ def main():
     
     if args.dataset == 'iam':
         print('loading IAM')
+        iam_folder = './iam_data/words'
+        myDataset = IAMDataset
+        style_classes = 339
+        if args.level == 'word':
+            train_data = myDataset(iam_folder, 'train', 'word', fixed_size=(1 * 64, 256), tokenizer=None, text_encoder=None, feat_extractor=None, transforms=transform, args=args)
+        else:
+            train_data = myDataset(iam_folder, 'train', 'word', fixed_size=(1 * 64, 256), tokenizer=None, text_encoder=None, feat_extractor=None, transforms=transform, args=args)
+            test_data = myDataset(iam_folder, 'test', 'word', fixed_size=(1 * 64, 256), tokenizer=None, text_encoder=None, feat_extractor=None, transforms=transform, args=args)
+        print('train data', len(train_data))
+        
+        test_size = args.batch_size
+        rest = len(train_data) - test_size
+        test_data, _ = random_split(train_data, [test_size, rest], generator=torch.Generator().manual_seed(42))
+
+    if args.dataset == 'riksarkivet':
+        print('loading riksarkivet..')
         iam_folder = './iam_data/words'
         myDataset = IAMDataset
         style_classes = 339
