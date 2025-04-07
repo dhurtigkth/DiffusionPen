@@ -92,7 +92,6 @@ class RiksarkivetDataset(WordLineDataset):
                     info = line.strip().split()
                     name = info[0]
                     name_parts = name.split('-')
-                    '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/lines/lines/0/0-0
                     pathlist = [root_path] + ['-'.join(name_parts[:i+1]) for i in range(len(name_parts))]
                     #print('name', name)
                     #form =
