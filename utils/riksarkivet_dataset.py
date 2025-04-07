@@ -125,6 +125,7 @@ class RiksarkivetDataset(WordLineDataset):
             return gt
 
         info = gather_iam_info(self, subset, segmentation_level)
+        print("info[0]: ", info[0])
         data = []
         widths = []
         padded_imgs = 0
