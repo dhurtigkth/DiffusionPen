@@ -1055,8 +1055,8 @@ def train_epoch_mixed(train_loader, model, criterion_triplet, criterion_classifi
         positive = data[4].to(device)
         negative = data[5].to(device)
 
-        print("type positive: ", np.type(positive))
-        print("type negative: ", np.type(negative))
+        print("type positive: ", type(positive))
+        print("type negative: ", type(negative))
         
         anchor = img.to(device)
         # Get logits and features from the model
