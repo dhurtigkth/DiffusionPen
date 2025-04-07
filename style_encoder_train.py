@@ -796,7 +796,8 @@ class RiksarkivetDataset_style(WordLineDataset):
 
 
             #print('img_path', img_path + '.png')
-            img = Image.open("/content/drive/MyDrive/Riksarkivet/DiffusionPen/" + img_path + '.png').convert('RGB') #.convert('L')
+            writer_id = img_path.split("-")[0]
+            img = Image.open("/content/drive/MyDrive/Riksarkivet/DiffusionPen/" + writer_id + "/" + img_path + '.png').convert('RGB') #.convert('L')
             #print('img shape PIL', img.size)
             img = image_resize_PIL(img, height=64)
             
