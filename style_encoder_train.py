@@ -1235,7 +1235,7 @@ def main():
     parser = argparse.ArgumentParser(description='Train Style Encoder')
     parser.add_argument('--model', type=str, default='mobilenetv2_100', help='type of cnn to use (resnet, densenet, etc.)')
     parser.add_argument('--dataset', type=str, default='iam', help='dataset name')
-    parser.add_argument('--batch_size', type=int, default=320, help='input batch size for training')
+    parser.add_argument('--batch_size', type=int, default=160, help='input batch size for training') # Changed batch size, from 320 to 160
     parser.add_argument('--epochs', type=int, default=20, required=False, help='number of training epochs')
     parser.add_argument('--pretrained', type=bool, default=False, help='use of feature extractor or not')
     parser.add_argument('--device', type=str, default='cuda:0', help='device to use for training / testing')
