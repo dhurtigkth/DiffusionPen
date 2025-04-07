@@ -19,7 +19,7 @@ class RiksarkivetDataset(WordLineDataset):
         self.word_file = './iam_data/ascii/words.txt'.format(self.basefolder, self.setname)
         #self.word_path = '{}/words'.format(self.basefolder, self.setname)
         self.word_path = self.basefolder
-        self.line_path = '{}/lines'.format(self.basefolder, self.setname)
+        self.line_path = ''
         self.forms = '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/ascii/forms.txt'
         self.tokenizer = tokenizer
         self.text_encoder = text_encoder
@@ -92,6 +92,7 @@ class RiksarkivetDataset(WordLineDataset):
                     info = line.strip().split()
                     name = info[0]
                     name_parts = name.split('-')
+                    '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/lines/lines/0/0-0
                     pathlist = [root_path] + ['-'.join(name_parts[:i+1]) for i in range(len(name_parts))]
                     #print('name', name)
                     #form =
