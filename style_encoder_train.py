@@ -771,7 +771,7 @@ class RiksarkivetDataset_style(WordLineDataset):
                     info = line.strip().split()
                     name = info[0]
                     writer_name = name.split("-")[0]
-                    img_path = "Single-Word-Dataset-Fixed/" + writer_name + "/lines/" + name
+                    img_path = "Single-Word-Dataset-Fixed/lines/" + writer_name + "/" + name
                     
                     transcr = ' '.join(info[8:])
                     #writer_name = form_writer_dict[form_name]
