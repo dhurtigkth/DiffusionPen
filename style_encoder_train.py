@@ -1052,9 +1052,11 @@ def train_epoch_mixed(train_loader, model, criterion_triplet, criterion_classifi
         wid = torch.tensor([int(x) for x in data[3]]).to(device)
         #wid = torch.tensor(data[3]).to(device) # CHANGED, started complaining?
         #wid = data[3].to(device)
-
         positive = data[4].to(device)
         negative = data[5].to(device)
+
+        print("type positive: ", np.type(positive))
+        print("type negative: ", np.type(negative))
         
         anchor = img.to(device)
         # Get logits and features from the model
@@ -1064,7 +1066,7 @@ def train_epoch_mixed(train_loader, model, criterion_triplet, criterion_classifi
         
         _, preds = torch.max(anchor_logits.data, 1)
         n_corrects += (preds == wid.data).sum().item()
-    
+        print("preds: ", preds)
         classification_loss = performance(anchor_logits, wid)
         triplet_loss = criterion_triplet(anchor_features, positive_features, negative_features)
         
