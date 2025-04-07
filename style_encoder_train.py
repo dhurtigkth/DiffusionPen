@@ -1150,7 +1150,8 @@ def train_mixed(model, train_loader, val_loader, criterion_triplet, criterion_cl
         
         if val_loss < best_loss:
             best_loss =val_loss
-            torch.save(model.state_dict(), f'{args.save_path}/mixed_{args.dataset}_{args.model}.pth')
+            #torch.save(model.state_dict(), f'{args.save_path}/mixed_{args.dataset}_{args.model}.pth') # CHANGED save path
+            torch.save(model.state_dict(), "/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/Models/Riksarkivet_1.pth")
             print("Saved Best Model!")
         
         scheduler.step(val_loss)
