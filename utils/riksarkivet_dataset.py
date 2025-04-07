@@ -116,6 +116,7 @@ class RiksarkivetDataset(WordLineDataset):
                     img_path = '/'.join(pathlist)
                     
                     transcr = ' '.join(info[8:])
+                    print("writer name: ", form_name)
                     writer_name = form_writer_dict[form_name]
                     #print('writer_name', writer_name)
                     writer_name = wr_dict[writer_name]
