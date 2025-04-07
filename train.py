@@ -604,14 +604,14 @@ def main():
     
     if args.dataset == 'iam':
         print('loading IAM')
-        riksarkivet_folder = './iam_data/words'
+        iam_folder = './iam_data/words'
         myDataset = IAMDataset
         style_classes = 339
         if args.level == 'word':
-            train_data = myDataset(riksarkivet_folder, 'train', 'word', fixed_size=(1 * 64, 256), tokenizer=None, text_encoder=None, feat_extractor=None, transforms=transform, args=args)
+            train_data = myDataset(iam_folder, 'train', 'word', fixed_size=(1 * 64, 256), tokenizer=None, text_encoder=None, feat_extractor=None, transforms=transform, args=args)
         else:
-            train_data = myDataset(riksarkivet_folder, 'train', 'word', fixed_size=(1 * 64, 256), tokenizer=None, text_encoder=None, feat_extractor=None, transforms=transform, args=args)
-            test_data = myDataset(riksarkivet_folder, 'test', 'word', fixed_size=(1 * 64, 256), tokenizer=None, text_encoder=None, feat_extractor=None, transforms=transform, args=args)
+            train_data = myDataset(iam_folder, 'train', 'word', fixed_size=(1 * 64, 256), tokenizer=None, text_encoder=None, feat_extractor=None, transforms=transform, args=args)
+            test_data = myDataset(iam_folder, 'test', 'word', fixed_size=(1 * 64, 256), tokenizer=None, text_encoder=None, feat_extractor=None, transforms=transform, args=args)
         print('train data', len(train_data))
         
         test_size = args.batch_size
@@ -620,7 +620,7 @@ def main():
 
     if args.dataset == 'riksarkivet':
         print('loading riksarkivet..')
-        iam_folder = '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/lines'
+        riksarkivet_folder = '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/lines'
         myDataset = RiksarkivetDataset
         style_classes = 8
         if args.level == 'word':
