@@ -873,7 +873,8 @@ class Mixed_Encoder(nn.Module):
 
 #================ Performance and Loss Function ========================
 def performance(pred, label):
-    
+    print("pred: ", pred)
+    print("label: ", label)
     loss = nn.CrossEntropyLoss()
    
     loss = loss(pred, label)
