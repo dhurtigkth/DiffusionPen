@@ -875,14 +875,7 @@ class Mixed_Encoder(nn.Module):
 def performance(pred, label):
     print("pred: ", pred)
     print("label: ", label)
-    types_pred = []
-    for t in pred:
-        types_pred.append(t)
-    print("types pred: ", set(types_pred))
-    types_label = []
-    for k in label:
-        types_pred.append(k)
-    print("types pred: ", set(types_label))
+    
     loss = nn.CrossEntropyLoss()
    
     loss = loss(pred, label)
@@ -1075,7 +1068,6 @@ def train_epoch_mixed(train_loader, model, criterion_triplet, criterion_classifi
         
         _, preds = torch.max(anchor_logits.data, 1)
         n_corrects += (preds == wid.data).sum().item()
-        print("preds: ", preds)
         classification_loss = performance(anchor_logits, wid)
         triplet_loss = criterion_triplet(anchor_features, positive_features, negative_features)
         
@@ -1349,7 +1341,7 @@ def main():
         else:
             print('No validation data')
             
-        style_classes = 2
+        style_classes = 8
     
     
     
