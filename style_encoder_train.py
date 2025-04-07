@@ -1049,9 +1049,8 @@ def train_epoch_mixed(train_loader, model, criterion_triplet, criterion_classifi
         
         img = data[0]
         #plt.imshow(img)
-        #wid = torch.tensor(data[3]).to(device) # CHANGED, started complaining?
-        print("wid: ", data[3])
-        wid = data[3].to(device)
+        wid = torch.tensor(data[3]).to(device) # CHANGED, started complaining?
+        #wid = data[3].to(device)
 
         positive = data[4].to(device)
         negative = data[5].to(device)
