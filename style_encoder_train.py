@@ -1341,7 +1341,7 @@ def main():
         else:
             print('No validation data')
             
-        style_classes = 8
+        style_classes = 8 # CHANGED, should be a better way to do this
     
     
     
