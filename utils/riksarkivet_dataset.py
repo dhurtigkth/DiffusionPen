@@ -45,7 +45,7 @@ class RiksarkivetDataset(WordLineDataset):
     
     
     def main_loader(self, subset, segmentation_level) -> list:
-        def gather_iam_info(self, set='train', level='word'):
+        def gather_iam_info(self, set='train', level='line'):
             # if subset == 'train':
                 #valid_set = np.loadtxt(self.trainset_file, dtype=str)
             #    valid_set = np.loadtxt('./aachen_iam_split/train_val.uttlist', dtype=str)
@@ -71,17 +71,17 @@ class RiksarkivetDataset(WordLineDataset):
             gt = []
             form_writer_dict = {}
             
-            dict_path = f'./writers_dict_{subset}.json'
+            #dict_path = f'./writers_dict_{subset}.json'
             #open dict file
-            with open(dict_path, 'r') as f:
-                wr_dict = json.load(f)
-            for l in open(forms):
-                if not l.startswith("#"):
-                    info = l.strip().split()
+            #with open(dict_path, 'r') as f:
+            #    wr_dict = json.load(f)
+            #for l in open(forms):
+            #    if not l.startswith("#"):
+            #        info = l.strip().split()
                     #print('info', info)
-                    form_name = info[0]
-                    writer_name = info[1]
-                    form_writer_dict[form_name] = writer_name
+            #        form_name = info[0]
+            #        writer_name = info[1]
+            #        form_writer_dict[form_name] = writer_name
                     #print('form_writer_dict', form_writer_dict)
                     #print('form_name', form_name)
                     #print('writer', writer_name)
