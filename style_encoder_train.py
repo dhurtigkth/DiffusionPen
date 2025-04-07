@@ -770,18 +770,13 @@ class RiksarkivetDataset_style(WordLineDataset):
                 if not line.startswith("#"):
                     info = line.strip().split()
                     name = info[0]
-
-                    img_path = "riksarkivet_data/lines/" + name
+                    writer_name = name.split("-")[0]
+                    img_path = "Single-Word-Dataset-Fixed/" + writer_name + "/lines/" + name
                     
                     transcr = ' '.join(info[8:])
                     #writer_name = form_writer_dict[form_name]
                     #print('writer_name', writer_name)
                     #writer_name = wr_dict[writer_name]
-                    writer_name = name.split("-")[0]
-                    if writer_name == "gota":
-                        writer_name = 0
-                    if writer_name == "jonkopings":
-                        writer_name = 1
                     gt.append((img_path, transcr, writer_name))
     
             return gt
@@ -796,9 +791,7 @@ class RiksarkivetDataset_style(WordLineDataset):
 
             # /content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed
             #print('img_path', img_path + '.png')
-            writer_id = img_path
-            print("writer_id: ", writer_id)
-            img = Image.open("/content/drive/MyDrive/Riksarkivet/DiffusionPen/" + writer_id + "/" + img_path + '.png').convert('RGB') #.convert('L')
+            img = Image.open("/content/drive/MyDrive/Riksarkivet/DiffusionPen/" + img_path + '.png').convert('RGB') #.convert('L')
             #print('img shape PIL', img.size)
             img = image_resize_PIL(img, height=64)
             
