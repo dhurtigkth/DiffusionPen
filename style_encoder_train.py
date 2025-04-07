@@ -798,7 +798,11 @@ class RiksarkivetDataset_style(WordLineDataset):
             if img.height < 64 and img.width < 256:
                 img = img
             else:
-                img = image_resize_PIL(img, height=img.height // 2)
+                try:
+                    img = image_resize_PIL(img, height=img.height // 2)
+                except:
+                    print("encountered an invalid image")
+                    continue
             
             #widths.append(img.size[0])
             # CHANGED CODE, the code complains that the images are not the same size and there is no centered/reshaping(??)
