@@ -553,7 +553,7 @@ def main():
     '''Main function'''
     parser = argparse.ArgumentParser()
     parser.add_argument('--epochs', type=int, default=100) # Changed, default was 1000
-    parser.add_argument('--batch_size', type=int, default=160) # Changed, CUDA running out of memory
+    parser.add_argument('--batch_size', type=int, default=120) # Changed, CUDA running out of memory
     parser.add_argument('--num_workers', type=int, default=4) 
     parser.add_argument('--model_name', type=str, default='diffusionpen', help='diffusionpen or wordstylist (previous work)')
     parser.add_argument('--level', type=str, default='word', help='word, line')
