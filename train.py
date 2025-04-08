@@ -577,7 +577,7 @@ def main():
     parser.add_argument('--sampling_word', type=bool, default=False) 
     parser.add_argument('--mix_rate', type=float, default=None)
     parser.add_argument('--style_path', type=str, default='./style_models/iam_style_diffusionpen.pth')
-    parser.add_argument('--stable_dif_path', type=str, default='./stable-diffusion-v1-5')
+    parser.add_argument('--stable_dif_path', type=str, default='/content/drive/MyDrive/Riksarkivet/DiffusionPen/stable-diffusion-v1-5') # Changed!
     parser.add_argument('--train_mode', type=str, default='train', help='train, sampling')
     parser.add_argument('--sampling_mode', type=str, default='single_sampling', help='single_sampling (generate single image), paragraph (generate paragraph)')
     
