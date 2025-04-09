@@ -580,6 +580,8 @@ def main():
     parser.add_argument('--stable_dif_path', type=str, default='/content/drive/MyDrive/Riksarkivet/DiffusionPen/stable-diffusion-v1-5') # Changed!
     parser.add_argument('--train_mode', type=str, default='train', help='train, sampling')
     parser.add_argument('--sampling_mode', type=str, default='single_sampling', help='single_sampling (generate single image), paragraph (generate paragraph)')
+
+    parser.add_argument('--learning_rate', type=float, default=0.0001)
     
     args = parser.parse_args()
 
@@ -692,7 +694,7 @@ def main():
     print('unet parameters')
     print('unet', sum(p.numel() for p in unet.parameters() if p.requires_grad))
     
-    optimizer = optim.AdamW(unet.parameters(), lr=0.0001)
+    optimizer = optim.AdamW(unet.parameters(), lr=args.learning_rate)
     lr_scheduler = None 
 
     mse_loss = nn.MSELoss()
