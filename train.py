@@ -620,7 +620,7 @@ def main():
 
     if args.dataset == 'riksarkivet':
         print('loading riksarkivet..')
-        riksarkivet_folder = '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/lines'
+        riksarkivet_folder = '/content/Single-Word-Dataset-Fixed/lines'
         myDataset = RiksarkivetDataset
         style_classes = 8
         if args.level == 'word':
