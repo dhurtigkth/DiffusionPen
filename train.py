@@ -798,7 +798,7 @@ def main():
         elif args.sampling_mode == 'paragraph':
             print('Sampling paragraph')
             #make the code to generate lines
-            lines = 'Kan man hoppas att detta fungerar?'
+            lines = 'John Gustafsson'
 
             filename = lines
 
