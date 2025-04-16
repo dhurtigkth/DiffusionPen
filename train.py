@@ -280,8 +280,8 @@ class Diffusion:
                     for label in labels:
                         print('label', label)
                         label_index = label.item()
-    
-                        matching_lines = [line for line in train_data if line[1] == reverse_wr_dict[label_index] and len(line[2])>3]
+                        print("train data: ", train_data)
+                        #matching_lines = [line for line in train_data if line[1] == reverse_wr_dict[label_index] and len(line[2])>3]
 
                         #pick the first 5 from matching lines
                         
