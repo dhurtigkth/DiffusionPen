@@ -958,7 +958,7 @@ def main():
             paragraph_image = Image.fromarray(paragraph_img)
             paragraph_image = paragraph_image.convert("L")    
             
-            paragraph_image.save(f'paragraph_style_{s}.png')
+            paragraph_image.save("/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/generated_images/paragraph.png")
 
     
 if __name__ == "__main__":
