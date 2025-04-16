@@ -359,7 +359,7 @@ class Diffusion:
                         st_imgs = []
                         grid_imgs = []
                         for im_idx, random_f in enumerate(five_styles):
-                            file_path = os.path.join(root_path, random_f[0].split("-")[0], random_f[0])
+                            file_path = os.path.join(root_path, random_f[0].split("-")[0], random_f[0]) + ".png"
                             print('file_path', file_path)
                         
                             try:
