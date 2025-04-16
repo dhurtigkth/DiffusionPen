@@ -798,7 +798,7 @@ def main():
         elif args.sampling_mode == 'paragraph':
             print('Sampling paragraph')
             #make the code to generate lines
-            lines = 'Nu försöker vi att skapa en bild'
+            lines = 'Kan man hoppas att detta fungerar?'
             fakes= []
             gap = np.ones((64, 16))
             max_line_width = 900
@@ -809,7 +809,7 @@ def main():
             #print('longest_word_length', longest_word_length)
             #s = random.randint(0, 339)#.long().to(args.device)
             #s = random.randint(0, 161)#.long().to(args.device)
-            s = 3 #25 #129 #201
+            s = 2 #25 #129 #201
             for word in lines.strip().split(' '):
                 print('Word:', word)
                 print('Style:', s)
@@ -958,7 +958,7 @@ def main():
             paragraph_image = Image.fromarray(paragraph_img)
             paragraph_image = paragraph_image.convert("L")    
             
-            paragraph_image.save("/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/generated_images/paragraph.png")
+            paragraph_image.save("/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/generated_images/" + lines + ".png")
 
     
 if __name__ == "__main__":
