@@ -271,13 +271,14 @@ class Diffusion:
                 reverse_wr_dict = {v: k for k, v in wr_dict.items()}
                 
                 #key = reverse_wr_dict[value]
-                with open('./utils/splits_words/iam_train_val.txt', 'r') as f:
+                #with open('./utils/splits_words/iam_train_val.txt', 'r') as f:
+                with open('/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/ascii/lines.txt', 'r') as f:
                 #with open('./utils/splits_words/iam_test.txt', 'r') as f:
                     train_data = f.readlines()
                     train_data = [i.strip().split(',') for i in train_data]
                     style_featur = []
                     for label in labels:
-                        #print('label', label)
+                        print('label', label)
                         label_index = label.item()
     
                         matching_lines = [line for line in train_data if line[1] == reverse_wr_dict[label_index] and len(line[2])>3]
