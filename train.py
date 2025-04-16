@@ -799,6 +799,10 @@ def main():
             print('Sampling paragraph')
             #make the code to generate lines
             lines = 'Kan man hoppas att detta fungerar?'
+
+            filename = lines
+
+            
             fakes= []
             gap = np.ones((64, 16))
             max_line_width = 900
@@ -958,7 +962,7 @@ def main():
             paragraph_image = Image.fromarray(paragraph_img)
             paragraph_image = paragraph_image.convert("L")    
             
-            paragraph_image.save("/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/generated_images/" + lines + ".png")
+            paragraph_image.save("/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/generated_images/" + filename + ".png")
 
     
 if __name__ == "__main__":
