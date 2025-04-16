@@ -277,10 +277,23 @@ class Diffusion:
                     train_data = f.readlines()
                     train_data = [i.strip().split(',') for i in train_data]
                     style_featur = []
+
+                    # Need to construct a dict with the values.
+                    ['0-0 _ _ _ _ _ _ _ vices', '']
+                    wr_dict = {}
+                    for line in train_data:
+                        line_split = line.split("_")
+                        id = line_split[0]
+                        transcr = line_split[8]
+                        print("id: ", id, "transcr: ", transcr)
+                        
+                    
                     for label in labels:
                         print('label', label)
                         label_index = label.item()
                         print("train data: ", train_data)
+
+                        ['0-0 _ _ _ _ _ _ _ vices', '']
                         #matching_lines = [line for line in train_data if line[1] == reverse_wr_dict[label_index] and len(line[2])>3]
 
                         #pick the first 5 from matching lines
