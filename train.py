@@ -801,7 +801,7 @@ def main():
         elif args.sampling_mode == 'paragraph':
             print('Sampling paragraph')
             #make the code to generate lines
-            lines = 'Akvarellmålningar äro vackra ting'
+            lines = 'till en paßlig karl härutinnan öfwerläggnings'
 
             filename = lines
 
