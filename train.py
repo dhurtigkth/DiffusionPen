@@ -331,7 +331,7 @@ class Diffusion:
                         #print('five_styles', five_styles)
                         #cor_image
                         fheight, fwidth = 64, 256
-                        root_path = './iam_data/words'
+                        root_path = '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/lines'
                         cor_im = False
                         if cor_im == True:
                             cor_image = Image.open(os.path.join(root_path, cor_image_random[0][0])).convert('RGB') #['a05/a05-089/a05-089-00-05.png', '000', 'debate']
@@ -359,9 +359,9 @@ class Diffusion:
                         st_imgs = []
                         grid_imgs = []
                         for im_idx, random_f in enumerate(five_styles):
-                            file_path = os.path.join(root_path, random_f[0])
-                            #print('file_path', file_path)
-                            
+                            file_path = os.path.join(root_path, random_f[0].split("-")[0], random_f[0])
+                            print('file_path', file_path)
+                        
                             try:
                                 img_s = Image.open(file_path).convert('RGB')
                             except ValueError:
