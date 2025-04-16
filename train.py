@@ -292,16 +292,11 @@ class Diffusion:
                         else:
                             wr_dict[writer_id] = [[full_id, transcr]]
                         
-                    print(wr_dict.keys())
-                    print(wr_dict["0"])
                     for label in labels:
-                        print('label', label)
                         label_index = label.item()
-                        print("train data: ", train_data)
 
-                        ['0-0 _ _ _ _ _ _ _ vices', '']
-                        #matching_lines = [line for line in train_data if line[1] == reverse_wr_dict[label_index] and len(line[2])>3]
-
+                        # get the matching lines                        
+                        matching_lines = [line for line in train_data if line[0].split("_")[7].strip() == wr_dict[label_index] and len(line[2])>3]
                         #pick the first 5 from matching lines
                         
                         if len(matching_lines) >= 5:
@@ -311,7 +306,7 @@ class Diffusion:
                             five_styles = random.sample(matching_lines, 5)
                             #five_styles = matching_lines_style[:5]
                         else:
-                            matching_lines = [line for line in train_data if line[1] == reverse_wr_dict[label_index]]
+                            matching_lines = [line for line in train_data if line[0].split("_")[7].strip() == reverse_wr_dict[label_index]]
                             #print('matching lines', matching_lines)
                             five_styles = matching_lines_style[:5]
                             five_styles = [matching_lines[0]]*5
