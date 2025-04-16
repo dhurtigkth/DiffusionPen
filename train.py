@@ -318,7 +318,7 @@ class Diffusion:
                         print('five_styles', five_styles)
                         #five_styles = random.sample(matching_lines, 5)
                         
-                        cor_image_random = random.sample(matching_lines, 1)
+                        cor_image_random = random.sample(matching_style, 1)
                         #print('cor_image_random', cor_image_random)
                         #five_styles =[['a05/a05-084/a05-084-04-05.png', '000', 'which'], ['a03/a03-073/a03-073-04-04.png', '000', 'stage'], ['a01/a01-077u/a01-077u-02-02.png', '000', 'cables'], ['a05/a05-089/a05-089-00-05.png', '000', 'debate'], ['a05/a05-048/a05-048-00-00.png', '000', 'Long']] #class id 12
                         #five_styles = [['b06/b06-071/b06-071-08-06.png', '128', 'Labour'], ['b06/b06-019/b06-019-05-04.png', '128', 'West'], ['b06/b06-071/b06-071-05-03.png', '128', 'could'], ['c06/c06-027/c06-027-01-01.png', '128', 'advantage'], ['c06/c06-076/c06-076-01-05.png', '128', 'never']] #class id 1
