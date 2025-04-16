@@ -779,7 +779,7 @@ def main():
         ema_model.eval()
         
         if args.sampling_mode == 'single_sampling':
-            x_text = ['Katastrof', 'Katastrof', 'Katastrof', 'Katastrof', 'Katastrof', 'Katastrof', 'Katastrof', 'Katastrof']
+            x_text = ['wederbörligen', 'wederbörligen', 'wederbörligen', 'wederbörligen', 'wederbörligen', 'wederbörligen', 'wederbörligen', 'wederbörligen']
             s = 0
             for x_text in x_text:
                 print('Word:', x_text)
