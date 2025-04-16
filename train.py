@@ -25,6 +25,8 @@ from torchvision.utils import save_image
 from torch.nn import DataParallel
 from transformers import CanineModel, CanineTokenizer
 
+from torchvision.utils import save_image
+
 torch.cuda.empty_cache()
 OUTPUT_MAX_LEN = 95 #+ 2  # <GO>+groundtruth+<END>
 IMG_WIDTH = 256
@@ -786,8 +788,11 @@ def main():
                 labels = torch.tensor([s]).long().to(args.device)
                 ema_sampled_images = diffusion.sampling(ema_model, vae, n=len(labels), x_text=x_text, labels=labels, args=args, style_extractor=feature_extractor, noise_scheduler=ddim, transform=transform, character_classes=None, tokenizer=tokenizer, text_encoder=text_encoder, run_idx=None)  
 
-                print(ema_sampled_images)
-                save_single_images(ema_sampled_images, os.path.join(f'./image_samples/', f'{x_text}_style_{s}.png'), args)
+                #print(ema_sampled_images.shape)
+                for idx, tensor in enumerate(large_tensor):
+                    save_image(tensor, '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/generated_images/image_' + str(idx) + ".png")
+                    
+                #save_single_images(ema_sampled_images, os.path.join(f'./image_samples/', f'{x_text}_style_{s}.png'), args)
 
         
         elif args.sampling_mode == 'paragraph':
