@@ -284,11 +284,16 @@ class Diffusion:
                     for line in train_data:
                         #['0-0 _ _ _ _ _ _ _ vices', '']
                         line_split = line[0].split("_")
-                        id = line_split[0].strip()
+                        full_id = line_split[0].strip()
+                        writer_id = full_id.split("-")[0]
                         transcr = line_split[7].strip()
-                        print("id: ", id, "transcr: ", transcr)
+                        if wr_dict[writer_id]:
+                            wr_dict[writer_id].append([full_id, transcr])
+                        else:
+                            wr_dict[writer_id] = [[full_id, transcr]]
                         
-                    
+                    print(wr_dict.keys())
+                    print(wr_dict["0"])
                     for label in labels:
                         print('label', label)
                         label_index = label.item()
