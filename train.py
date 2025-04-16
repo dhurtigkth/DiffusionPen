@@ -779,7 +779,7 @@ def main():
         ema_model.eval()
         
         if args.sampling_mode == 'single_sampling':
-            x_text = ['nu', 'ska', 'vi', 'se', 'huruvida', 'detta', 'fungerar']
+            x_text = ['Akvarellmålning', 'Akvarellmålning', 'Akvarellmålning', 'Akvarellmålning', 'Akvarellmålning', 'Akvarellmålning', 'Akvarellmålning']
             for x_text in x_text:
                 print('Word:', x_text)
                 s = random.randint(0, 7) #index for style class
@@ -789,8 +789,10 @@ def main():
                 ema_sampled_images = diffusion.sampling(ema_model, vae, n=len(labels), x_text=x_text, labels=labels, args=args, style_extractor=feature_extractor, noise_scheduler=ddim, transform=transform, character_classes=None, tokenizer=tokenizer, text_encoder=text_encoder, run_idx=None)  
 
                 #print(ema_sampled_images.shape)
+                i = 0
                 for idx, tensor in enumerate(ema_sampled_images):
-                    save_image(tensor, '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/generated_images/image_' + str(idx) + "_" + x_text +  ".png")
+                    save_image(tensor, '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/generated_images/image_' + i + "_" + x_text +  ".png")
+                    i += 1
                     
                 #save_single_images(ema_sampled_images, os.path.join(f'./image_samples/', f'{x_text}_style_{s}.png'), args)
 
