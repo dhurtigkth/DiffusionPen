@@ -772,7 +772,7 @@ def main():
         elif args.sampling_mode == 'paragraph':
             print('Sampling paragraph')
             #make the code to generate lines
-            lines = 'In this work , we focus on style variation . We present a novel method to control the style of the text . Our method is able to mimic various writing styles .'
+            lines = 'Nu försöker vi att skapa en bild'
             fakes= []
             gap = np.ones((64, 16))
             max_line_width = 900
@@ -783,7 +783,7 @@ def main():
             #print('longest_word_length', longest_word_length)
             #s = random.randint(0, 339)#.long().to(args.device)
             #s = random.randint(0, 161)#.long().to(args.device)
-            s = 12 #25 #129 #201
+            s = 3 #25 #129 #201
             for word in lines.strip().split(' '):
                 print('Word:', word)
                 print('Style:', s)
