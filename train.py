@@ -287,7 +287,7 @@ class Diffusion:
                         full_id = line_split[0].strip()
                         writer_id = full_id.split("-")[0]
                         transcr = line_split[7].strip()
-                        if wr_dict[writer_id]:
+                        if writer_id in wr_dict:
                             wr_dict[writer_id].append([full_id, transcr])
                         else:
                             wr_dict[writer_id] = [[full_id, transcr]]
