@@ -791,7 +791,7 @@ def main():
                 #print(ema_sampled_images.shape)
                 i = 0
                 for idx, tensor in enumerate(ema_sampled_images):
-                    save_image(tensor, '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/generated_images/image_' + i + "_" + x_text +  ".png")
+                    save_image(tensor, '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/generated_images/image_' + str(i) + "_" + x_text +  ".png")
                     i += 1
                     
                 #save_single_images(ema_sampled_images, os.path.join(f'./image_samples/', f'{x_text}_style_{s}.png'), args)
