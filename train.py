@@ -279,7 +279,7 @@ class Diffusion:
                     style_featur = []
 
                     # Need to construct a dict with the values.
-                    ['0-0 _ _ _ _ _ _ _ vices', '']
+                    #['0-0 _ _ _ _ _ _ _ vices', '']
                     wr_dict = {}
                     for line in train_data:
                         line_split = line.split("_")
