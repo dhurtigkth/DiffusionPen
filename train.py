@@ -282,8 +282,8 @@ class Diffusion:
                     #['0-0 _ _ _ _ _ _ _ vices', '']
                     wr_dict = {}
                     for line in train_data:
-                        print(line)
-                        line_split = line.split("_")
+                        #['0-0 _ _ _ _ _ _ _ vices', '']
+                        line_split = line[0].split("_")
                         id = line_split[0]
                         transcr = line_split[8]
                         print("id: ", id, "transcr: ", transcr)
