@@ -798,7 +798,7 @@ def main():
         elif args.sampling_mode == 'paragraph':
             print('Sampling paragraph')
             #make the code to generate lines
-            lines = 'John Gustafsson'
+            lines = 'Akvarellmålning äro vackra ting'
 
             filename = lines
 
@@ -813,7 +813,7 @@ def main():
             #print('longest_word_length', longest_word_length)
             #s = random.randint(0, 339)#.long().to(args.device)
             #s = random.randint(0, 161)#.long().to(args.device)
-            s = 6 #25 #129 #201 # WRITER STYLE
+            s = 0 #25 #129 #201 # WRITER STYLE
             for word in lines.strip().split(' '):
                 print('Word:', word)
                 print('Style:', s)
