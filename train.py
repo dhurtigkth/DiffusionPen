@@ -758,10 +758,10 @@ def main():
         ema_model.eval()
         
         if args.sampling_mode == 'single_sampling':
-            x_text = ['text', 'word']
+            x_text = ['nu', 'ska', 'vi', 'se', 'huruvida', 'detta', 'fungerar']
             for x_text in x_text:
                 print('Word:', x_text)
-                s = random.randint(0, 339) #index for style class
+                s = random.randint(0, 7) #index for style class
                 
                 print('style', s)
                 labels = torch.tensor([s]).long().to(args.device)
