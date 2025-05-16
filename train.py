@@ -815,7 +815,7 @@ def main():
 
             s_counts = {i: 0 for i in range(8)}
             
-            for word in tqdm(x_text, descr="generating images.."):
+            for word in tqdm(x_text, desc="generating images.."):
                 s = random.randint(0, 7)
                 print("word generated: ", word, "in style: ", str(s))
                 labels = torch.tensor([s]).long().to(args.device)
