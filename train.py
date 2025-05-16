@@ -647,7 +647,7 @@ def main():
 
     if args.dataset == 'riksarkivet':
         print('loading riksarkivet..')
-        if self.train_mode == "train":
+        if args.train_mode == "train":
             riksarkivet_folder = '/content/Single-Word-Dataset-Fixed/lines'
         else:
             riksarkivet_folder = '/content/Single-Word-Dataset-Fixed-train/lines'
