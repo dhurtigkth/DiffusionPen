@@ -810,16 +810,20 @@ def main():
             text_filepath = args.word_file
             with open(text_filepath, "r") as text_file:
                 for line in text_file:
-                    print("word added: ", line)
-                    x_text.append(line.strip())
+                    # 6-1161 _ _ _ _ _ _ _ Patron Using skulle
+                    #writer_id = line[0]
+                    word = line.split("_")[7].strip()
+                    x_text.append(word)
 
             s_counts = {i: 0 for i in range(8)}
             
             for word in tqdm(x_text, desc="generating images.."):
                 s = random.randint(0, 7)
-                print("word generated: ", word, "in style: ", str(s))
+                #s = word[0]
+                text = word
+                #print("word generated: ", word, "in style: ", str(s))
                 labels = torch.tensor([s]).long().to(args.device)
-                ema_sampled_images = diffusion.sampling(ema_model, vae, n=len(labels), x_text=word, labels=labels, args=args, style_extractor=feature_extractor, noise_scheduler=ddim, transform=transform, character_classes=None, tokenizer=tokenizer, text_encoder=text_encoder, run_idx=None)  
+                ema_sampled_images = diffusion.sampling(ema_model, vae, n=len(labels), x_text=text, labels=labels, args=args, style_extractor=feature_extractor, noise_scheduler=ddim, transform=transform, character_classes=None, tokenizer=tokenizer, text_encoder=text_encoder, run_idx=None)  
 
                 image_name = str(s) + "-" + str(s_counts[s])
 
