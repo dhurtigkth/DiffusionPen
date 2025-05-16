@@ -329,7 +329,7 @@ class Diffusion:
                         
                         interpol = False
                         if interpol == True:
-                            label2 = random.randint(0, 339) #random label
+                            label2 = random.randint(0, 7) #random label
                             matching_lines2 = [line for line in train_data if line[1] == reverse_wr_dict[label2] and len(line[2])>3]
                             five_styles = random.sample(matching_lines2, 5)
                         #print('five_styles', five_styles)
