@@ -319,7 +319,7 @@ class Diffusion:
                         #    five_styles = matching_lines_style[:5]
                         #    five_styles = [matching_lines[0]]*5
                             #five_styles = random.sample(matching_lines, 5)
-                        print('five_styles', five_styles)
+                        #print('five_styles', five_styles)
                         #five_styles = random.sample(matching_lines, 5)
                         
                         cor_image_random = random.sample(matching_style, 1)
@@ -364,7 +364,7 @@ class Diffusion:
                         grid_imgs = []
                         for im_idx, random_f in enumerate(five_styles):
                             file_path = os.path.join(root_path, random_f[0].split("-")[0], random_f[0]) + ".png"
-                            print('file_path', file_path)
+                            #print('file_path', file_path)
                         
                             try:
                                 img_s = Image.open(file_path).convert('RGB')
