@@ -149,7 +149,7 @@ class RiksarkivetDataset(WordLineDataset):
                 print('imgs: [{}/{} ({:.0f}%)]'.format(i, len(info), 100. * i / len(info)))
               
             try:
-                print("img_path: ", img_path)
+                #print("img_path: ", img_path)
                 img = Image.open(img_path + '.png').convert('RGB') #.convert('L')
                 
                 #if the transcription is in stopwords
