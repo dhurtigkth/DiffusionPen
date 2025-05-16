@@ -648,9 +648,9 @@ def main():
     if args.dataset == 'riksarkivet':
         print('loading riksarkivet..')
         if args.train_mode == "train":
-            riksarkivet_folder = '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/ascii/lines.txt'
+            riksarkivet_folder = '/content/Single-Word-Dataset-Fixed/'
         else:
-            riksarkivet_folder = '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/ascii/training_lines.txt'
+            riksarkivet_folder = '/content/Single-Word-Dataset-Fixed-train/'
         myDataset = RiksarkivetDataset
         style_classes = 8
         if args.level == 'word':
