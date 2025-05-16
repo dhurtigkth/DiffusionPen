@@ -607,6 +607,7 @@ def main():
     parser.add_argument('--learning_rate', type=float, default=0.0001)
 
     parser.add_argument('--word_file', type=str, default="")
+    parser.add_argument('--generated_output_path', type=str)
     
     args = parser.parse_args()
 
@@ -805,24 +806,30 @@ def main():
                 #save_single_images(ema_sampled_images, os.path.join(f'./image_samples/', f'{x_text}_style_{s}.png'), args)
 
         if args.sampling_mode == 'full_dataset':
-            #x_text = ['wederbörligen', 'wederbörligen', 'wederbörligen', 'wederbörligen', 'wederbörligen', 'wederbörligen', 'wederbörligen', 'wederbörligen']
-            #style = 
             x_text = []
             text_filepath = args.word_file
             with open(text_filepath, "r") as text_file:
                 for line in text_file:
                     print("word added: ", line)
                     x_text.append(line.strip())
-                    
-            for word in tqdm(x_text):
+
+            s_counts = {i: 0 for i in range(8)}
+            
+            for word in tqdm(x_text, descr="generating images.."):
                 s = random.randint(0, 7)
                 print("word generated: ", word, "in style: ", str(s))
                 labels = torch.tensor([s]).long().to(args.device)
                 ema_sampled_images = diffusion.sampling(ema_model, vae, n=len(labels), x_text=word, labels=labels, args=args, style_extractor=feature_extractor, noise_scheduler=ddim, transform=transform, character_classes=None, tokenizer=tokenizer, text_encoder=text_encoder, run_idx=None)  
 
-                #print(ema_sampled_images.shape)
+                image_name = str(s) + "-" + str(s_counts[s])
+
                 for idx, tensor in enumerate(ema_sampled_images):
-                    save_image(tensor, '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/generated_images/image_' + str(idx) + "_" + word +  ".png")
+                    save_image(tensor, args.generated_output_path + "/lines/" + str(s) + "/" + image_name + ".png")
+
+                with open("/content/Single-Word-Dataset-Fixed-Generated/ascii/lines.txt", "a") as text_file:
+                    text_file.write(image_name + " _ _ _ _ _ _ _ " + word + "\n")
+
+                s_counts[s] += 1
                     
                 #save_single_images(ema_sampled_images, os.path.join(f'./image_samples/', f'{x_text}_style_{s}.png'), args)
 
