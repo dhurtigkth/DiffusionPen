@@ -15,12 +15,12 @@ class RiksarkivetDataset(WordLineDataset):
         self.valset_file = '{}/{}/set_split/validationset1.txt'.format(self.basefolder, self.setname)
         self.testset_file = '{}/{}/set_split/testset.txt'.format(self.basefolder, self.setname)
         #self.line_file = '{}/ascii/lines.txt'.format(self.basefolder, self.setname)
-        self.line_file = self.basefolder
+        self.line_file = basefolder
         self.word_file = './iam_data/ascii/words.txt'.format(self.basefolder, self.setname)
         #self.word_path = '{}/words'.format(self.basefolder, self.setname)
-        self.word_path = self.basefolder
+        self.word_path = basefolder
         #self.line_path = '/content/Single-Word-Dataset-Fixed/lines'
-        self.line_path = 'self.basefolder'
+        self.line_path = basefolder
         self.forms = '/content/Single-Word-Dataset-Fixed/ascii/forms.txt'
         self.tokenizer = tokenizer
         self.text_encoder = text_encoder
