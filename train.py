@@ -27,6 +27,8 @@ from transformers import CanineModel, CanineTokenizer
 
 from torchvision.utils import save_image
 
+import random
+
 torch.cuda.empty_cache()
 OUTPUT_MAX_LEN = 95 #+ 2  # <GO>+groundtruth+<END>
 IMG_WIDTH = 256
@@ -603,6 +605,8 @@ def main():
     parser.add_argument('--sampling_mode', type=str, default='single_sampling', help='single_sampling (generate single image), paragraph (generate paragraph)')
 
     parser.add_argument('--learning_rate', type=float, default=0.0001)
+
+    parser.add_argument('--word_file', type=str, default="")
     
     args = parser.parse_args()
 
@@ -797,6 +801,28 @@ def main():
                     save_image(tensor, '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/generated_images/image_' + str(s) + "_" + x_text +  ".png")
                     
                 s += 1
+                    
+                #save_single_images(ema_sampled_images, os.path.join(f'./image_samples/', f'{x_text}_style_{s}.png'), args)
+
+        if args.sampling_mode == 'full_dataset':
+            #x_text = ['wederbörligen', 'wederbörligen', 'wederbörligen', 'wederbörligen', 'wederbörligen', 'wederbörligen', 'wederbörligen', 'wederbörligen']
+            #style = 
+            x_text = []
+            text_filepath = args.word_file
+            with open(text_filepath, "r") as text_file:
+                for line in text_file:
+                    print("word added: ", line)
+                    x_text.append(line.strip())
+                    
+            for word in tqdm(x_text):
+                s = random.randint(0, 7)
+                print("word generated: ", word, "in style: ", str(s))
+                labels = torch.tensor([s]).long().to(args.device)
+                ema_sampled_images = diffusion.sampling(ema_model, vae, n=len(labels), x_text=word, labels=labels, args=args, style_extractor=feature_extractor, noise_scheduler=ddim, transform=transform, character_classes=None, tokenizer=tokenizer, text_encoder=text_encoder, run_idx=None)  
+
+                #print(ema_sampled_images.shape)
+                for idx, tensor in enumerate(ema_sampled_images):
+                    save_image(tensor, '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/generated_images/image_' + str(idx) + "_" + word +  ".png")
                     
                 #save_single_images(ema_sampled_images, os.path.join(f'./image_samples/', f'{x_text}_style_{s}.png'), args)
 
