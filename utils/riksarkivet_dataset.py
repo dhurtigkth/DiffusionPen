@@ -19,7 +19,8 @@ class RiksarkivetDataset(WordLineDataset):
         self.word_file = './iam_data/ascii/words.txt'.format(self.basefolder, self.setname)
         #self.word_path = '{}/words'.format(self.basefolder, self.setname)
         self.word_path = self.basefolder
-        self.line_path = '/content/Single-Word-Dataset-Fixed/lines'
+        #self.line_path = '/content/Single-Word-Dataset-Fixed/lines'
+        self.line_path = 'self.basefolder'
         self.forms = '/content/Single-Word-Dataset-Fixed/ascii/forms.txt'
         self.tokenizer = tokenizer
         self.text_encoder = text_encoder
