@@ -822,6 +822,7 @@ def main():
                 #s = random.randint(0, 7)
                 s = int(word[0])
                 text = word[1]
+                filename = word[2]
                 #print("word generated: ", word, "in style: ", str(s))
                 labels = torch.tensor([s]).long().to(args.device)
                 ema_sampled_images = diffusion.sampling(ema_model, vae, n=len(labels), x_text=text, labels=labels, args=args, style_extractor=feature_extractor, noise_scheduler=ddim, transform=transform, character_classes=None, tokenizer=tokenizer, text_encoder=text_encoder, run_idx=None)  
@@ -829,10 +830,10 @@ def main():
                 image_name = str(s) + "-" + str(s_counts[s])
 
                 for idx, tensor in enumerate(ema_sampled_images):
-                    save_image(tensor, args.generated_output_path + "/lines/" + str(s) + "/" + word[2] + ".png")
+                    save_image(tensor, args.generated_output_path + "/lines/" + str(s) + "/" + filename + ".png")
 
                 with open("/content/Single-Word-Dataset-Fixed-Generated/ascii/lines.txt", "a") as text_file:
-                    text_file.write(word[2] + " _ _ _ _ _ _ _ " + text + "\n")
+                    text_file.write(filename + " _ _ _ _ _ _ _ " + text + "\n")
 
                 s_counts[s] += 1
                     
