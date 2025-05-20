@@ -832,7 +832,7 @@ def main():
                 for idx, tensor in enumerate(ema_sampled_images):
                     save_image(tensor, args.generated_output_path + "/lines/" + str(s) + "/" + filename + ".png")
 
-                with open("/content/Single-Word-Dataset-Fixed-Generated/ascii/lines.txt", "a") as text_file:
+                with open("/content/Single-Word-Dataset-Fixed-Generated-Identical/ascii/lines.txt", "a") as text_file:
                     text_file.write(filename + " _ _ _ _ _ _ _ " + text + "\n")
 
                 s_counts[s] += 1
