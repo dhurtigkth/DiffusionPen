@@ -832,7 +832,7 @@ def main():
                     save_image(tensor, args.generated_output_path + "/lines/" + str(s) + "/" + word[2] + ".png")
 
                 with open("/content/Single-Word-Dataset-Fixed-Generated/ascii/lines.txt", "a") as text_file:
-                    text_file.write(image_name + " _ _ _ _ _ _ _ " + word + "\n")
+                    text_file.write(word[2] + " _ _ _ _ _ _ _ " + text + "\n")
 
                 s_counts[s] += 1
                     
