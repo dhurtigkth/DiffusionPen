@@ -813,7 +813,8 @@ def main():
                     # 6-1161 _ _ _ _ _ _ _ Patron Using skulle
                     writer_id = line[0]
                     word = line.split("_")[7].strip()
-                    x_text.append([writer_id, word])
+                    filename = line.split("_")[0].strip()
+                    x_text.append([writer_id, word, filename])
 
             s_counts = {i: 0 for i in range(8)}
             
@@ -828,7 +829,7 @@ def main():
                 image_name = str(s) + "-" + str(s_counts[s])
 
                 for idx, tensor in enumerate(ema_sampled_images):
-                    save_image(tensor, args.generated_output_path + "/lines/" + str(s) + "/" + image_name + ".png")
+                    save_image(tensor, args.generated_output_path + "/lines/" + str(s) + "/" + word[2] + ".png")
 
                 with open("/content/Single-Word-Dataset-Fixed-Generated/ascii/lines.txt", "a") as text_file:
                     text_file.write(image_name + " _ _ _ _ _ _ _ " + word + "\n")
