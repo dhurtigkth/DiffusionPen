@@ -791,7 +791,8 @@ class RiksarkivetDataset_style(WordLineDataset):
 
             # /content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed
             #print('img_path', img_path + '.png')
-            img = Image.open("/content/drive/MyDrive/Riksarkivet/" + img_path + '.png').convert('RGB') #.convert('L')
+            
+            img = Image.open("/content/Single-Word-Dataset-Fixed" + img_path).convert('RGB') #.convert('L')
             #print('img shape PIL', img.size)
             img = image_resize_PIL(img, height=64)
             
