@@ -278,7 +278,7 @@ class WordLineDataset(Dataset):
                 self.stopwords.append(line.strip().split(','))
             self.stopwords = self.stopwords[0]
         
-        save_path = './Riksarkivet_dataset_PIL_style' # CHANGED , set custom save path
+        save_path = './Riksarkivet_dataset_PIL_style-July' # CHANGED , set custom save path
         if os.path.exists(save_path) is False:
             os.makedirs(save_path, exist_ok=True)
         save_file = '{}/{}_{}_{}.pt'.format(save_path, self.subset, self.segmentation_level, self.setname) #dataset_path + '/' + set + '_' + level + '_IAM.pt'
