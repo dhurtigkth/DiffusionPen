@@ -875,8 +875,8 @@ class Mixed_Encoder(nn.Module):
 def performance(pred, label):
 
     loss = nn.CrossEntropyLoss()
-    print("SHAPE: ", pred.shape)
-    print("pred: ", pred, "label", label)
+    #print("SHAPE: ", pred.shape)
+    #print("pred: ", pred, "label", label)
     loss = loss(pred, label)
     return loss 
 
@@ -1339,7 +1339,7 @@ def main():
         else:
             print('No validation data')
             
-        style_classes = 8 # CHANGED, should be a better way to do this
+        style_classes = 40 # CHANGED, should be a better way to do this
     
     
     
