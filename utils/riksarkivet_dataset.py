@@ -122,7 +122,7 @@ class RiksarkivetDataset(WordLineDataset):
                     #writer_name = form_writer_dict[form_name]
                     #print('writer_name', writer_name)
                     #writer_name = wr_dict[writer_name]
-                    
+                    print(img_path, transcr, writer_name)
                     gt.append((img_path, transcr, writer_name))
             return gt
 
