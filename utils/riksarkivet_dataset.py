@@ -150,7 +150,7 @@ class RiksarkivetDataset(WordLineDataset):
               
             try:
                 print("img_path: ", img_path)
-                img = Image.open(img_path).convert('RGB') #.convert('L') #CHANGED
+                img = Image.open(img_path + '.png').convert('RGB') #.convert('L') #CHANGED
                 
                 #if the transcription is in stopwords
                 if transcr in string.punctuation:
