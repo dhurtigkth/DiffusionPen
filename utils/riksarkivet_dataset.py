@@ -68,6 +68,7 @@ class RiksarkivetDataset(WordLineDataset):
             elif level == 'line':
                 gtfile = self.line_file
                 root_path = self.line_path
+                print(gtfile, root_path)
             else:
                 raise ValueError
             gt = []
