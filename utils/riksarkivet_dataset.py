@@ -125,7 +125,7 @@ class RiksarkivetDataset(WordLineDataset):
                     print(img_path, transcr, writer_name)
                     gt.append((img_path, transcr, writer_name))
             return gt
-
+        print('HELLO')
         info = gather_iam_info(self, subset, segmentation_level)
         print("info[0]: ", info[0])
         data = []
