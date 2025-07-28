@@ -1339,7 +1339,7 @@ def main():
         else:
             print('No validation data')
             
-        style_classes = 40 # CHANGED, should be a better way to do this
+        style_classes = 7 # CHANGED, should be a better way to do this
     
     
     
