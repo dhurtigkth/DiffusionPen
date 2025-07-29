@@ -436,6 +436,7 @@ class WordLineDataset(Dataset):
         #padding_length = self.max_transcr_len - len(char_tokens)
         padding_length = 95 - len(char_tokens)
         char_tokens.extend([pad_token] * padding_length)
+            
         
         #char_tokens += [pad_token] * (self.max_transcr_len - len(char_tokens))
         char_tokens = torch.tensor(char_tokens, dtype=torch.long)
@@ -447,6 +448,9 @@ class WordLineDataset(Dataset):
         #print('pixel_values_pos', pixel_values_pos.shape)
         #img = outImg
         #save_image(img, 'check_augm.png')
+        if len(char_tokens) > 95:
+            char_tokens = char_tokens[:95]
+
         return img, transcr, char_tokens, wid, img_pos, img_neg, cla, s_imgs, img_path, img, img_pos, img_neg #pixel_values_img, pixel_values_pos, pixel_values_neg
 
     def collate_fn(self, batch):
