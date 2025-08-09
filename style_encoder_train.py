@@ -448,8 +448,6 @@ class WordLineDataset(Dataset):
         #print('pixel_values_pos', pixel_values_pos.shape)
         #img = outImg
         #save_image(img, 'check_augm.png')
-        if len(char_tokens) > 95:
-            char_tokens = char_tokens[:95]
 
         return img, transcr, char_tokens, wid, img_pos, img_neg, cla, s_imgs, img_path, img, img_pos, img_neg #pixel_values_img, pixel_values_pos, pixel_values_neg
 
@@ -1345,7 +1343,7 @@ def main():
         else:
             print('No validation data')
             
-        style_classes = 7 # CHANGED, should be a better way to do this
+        style_classes = 8# CHANGED, should be a better way to do this
     
     
     
