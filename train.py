@@ -653,7 +653,7 @@ def main():
         else:
             riksarkivet_folder = '/content/Single-Word-Dataset-Fixed-train/'
         myDataset = RiksarkivetDataset
-        style_classes = 7 # CHANGED
+        style_classes = 8 # CHANGED
         print(args.level)
         if args.level == 'word':
             train_data = myDataset(riksarkivet_folder, 'train', 'line', fixed_size=(1 * 64, 256), tokenizer=None, text_encoder=None, feat_extractor=None, transforms=transform, args=args)
