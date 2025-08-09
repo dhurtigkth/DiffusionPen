@@ -276,7 +276,8 @@ class Diffusion:
                 
                 #key = reverse_wr_dict[value]
                 #with open('./utils/splits_words/iam_train_val.txt', 'r') as f:
-                with open('/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/ascii/lines.txt', 'r') as f:
+                #with open('/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/ascii/lines.txt', 'r') as f:
+                with open('/content/Single-Word-Dataset-Fixed/ascii/lines.txt', 'r') as f:
                 #with open('./utils/splits_words/iam_test.txt', 'r') as f:
                     train_data = f.readlines()
                     train_data = [i.strip().split(',') for i in train_data]
@@ -335,7 +336,8 @@ class Diffusion:
                         #print('five_styles', five_styles)
                         #cor_image
                         fheight, fwidth = 64, 256
-                        root_path = '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/lines'
+                        #root_path = '/content/drive/MyDrive/Riksarkivet/Single-Word-Dataset-Fixed/lines'
+                        root_path = '/content/Single-Word-Dataset-Fixed/lines'
                         cor_im = False
                         if cor_im == True:
                             cor_image = Image.open(os.path.join(root_path, cor_image_random[0][0])).convert('RGB') #['a05/a05-089/a05-089-00-05.png', '000', 'debate']
